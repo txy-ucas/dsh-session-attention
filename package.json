@@ -1,0 +1,100 @@
+{
+  "name": "dsh-session-attention",
+  "version": "0.1.0",
+  "description": "A global attention center for completed and blocked DeepSeek Harness sessions",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/txy-ucas/dsh-session-attention.git"
+  },
+  "homepage": "https://github.com/txy-ucas/dsh-session-attention#readme",
+  "bugs": {
+    "url": "https://github.com/txy-ucas/dsh-session-attention/issues"
+  },
+  "type": "module",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "types": "lib/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/types/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./invariant": {
+      "types": "./lib/types/invariant.d.ts",
+      "default": "./lib/invariant.js"
+    },
+    "./client": {
+      "types": "./lib/types/client/index.d.ts",
+      "default": "./lib/client.cjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib/index.js",
+    "lib/invariant.js",
+    "lib/client.cjs",
+    "lib/client.cjs.map",
+    "lib/types/**/*.d.ts",
+    "cordis.patch.yml",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": "^22.19.0 || >=24.0.0"
+  },
+  "dsh": {
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-runtime",
+        "@deepseek-ai/dsh-client-ui-layout"
+      ]
+    },
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json && tsdown",
+    "check": "pnpm run typecheck && pnpm run lint && pnpm run test && pnpm run pack:check",
+    "lint": "oxlint src tests tsdown.config.ts",
+    "test:install": "node tests/install.e2e.mjs",
+    "pack:check": "publint",
+    "prepare": "pnpm run build",
+    "test": "pnpm run build && vitest run",
+    "typecheck": "tsc --noEmit",
+    "watch": "tsc -p tsconfig.build.json --watch & tsdown --watch"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "4.0.1",
+    "@deepseek-ai/dsh-client-locale": "0.1.0-rc.6",
+    "@deepseek-ai/dsh-client-runtime": "0.1.0-rc.6",
+    "@deepseek-ai/dsh-client-ui-layout": "0.1.0-rc.6",
+    "@deepseek-ai/dsh-client-ui-slots": "0.1.0-rc.6",
+    "@deepseek-ai/dsh-invariants": "0.1.0-rc.6",
+    "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "@deepseek-ai/cordis": "4.0.1",
+    "@deepseek-ai/dsh-client-locale": "0.1.0-rc.6",
+    "@deepseek-ai/dsh-client-runtime": "0.1.0-rc.6",
+    "@deepseek-ai/dsh-client-ui-layout": "0.1.0-rc.6",
+    "@deepseek-ai/dsh-client-ui-slots": "0.1.0-rc.6",
+    "@deepseek-ai/dsh-invariants": "0.1.0-rc.6",
+    "@testing-library/react": "16.3.2",
+    "@types/node": "22.20.0",
+    "@types/react": "18.3.31",
+    "@types/react-dom": "18.3.7",
+    "jsdom": "29.1.1",
+    "lightningcss": "1.32.0",
+    "oxlint": "1.76.0",
+    "publint": "0.3.21",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "tsdown": "0.22.2",
+    "typescript": "6.0.3",
+    "vitest": "4.1.8"
+  },
+  "packageManager": "pnpm@11.7.0"
+}

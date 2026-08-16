@@ -1,0 +1,13 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "declaration": true,
+    "declarationMap": true,
+    "emitDeclarationOnly": false,
+    "outDir": "lib/types",
+    "rootDir": "src",
+    "rewriteRelativeImportExtensions": true,
+    "types": []
+  },
+  "include": ["src"]
+}
